@@ -4,7 +4,7 @@ import { css, Global, ThemeProvider } from '@emotion/react';
 import theme from '@style/theme';
 import Timer from '@components/Timer';
 import Minesweeper from '@components/Minesweeper';
-import DifficultySelect from '@components/DifficultySelect';
+import DifficultySelect from '@/components/DifficultySelect/DifficultySelect';
 
 function App() {
   return (
@@ -30,7 +30,7 @@ function App() {
   );
 }
 
-const globalCss = {
+export const globalCss = {
   body: css({
     display: 'flex',
     justifyContent: 'center',
