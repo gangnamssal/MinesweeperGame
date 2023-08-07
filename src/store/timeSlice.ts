@@ -6,7 +6,7 @@ interface InitialState {
   second: number;
 }
 
-const initialState: InitialState = {
+export const initialState: InitialState = {
   minute: 0,
   second: 0,
 };
