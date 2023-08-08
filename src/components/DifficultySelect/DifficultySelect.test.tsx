@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { Mock, describe, it, vi } from 'vitest';
+import userEvent from '@testing-library/user-event';
 import { fireEvent, render, screen } from '@testing-library/react';
 
 import theme from '@style/theme';
@@ -9,6 +10,8 @@ import DifficultySelect from '@components/DifficultySelect/DifficultySelect';
 vi.mock('react-redux');
 
 const dispatch = vi.fn();
+const context = describe;
+const user = userEvent.setup();
 
 (useDispatch as Mock).mockImplementation(() => dispatch);
 
@@ -49,6 +52,38 @@ describe('DifficultySelect', () => {
     optionsEl.forEach((option: HTMLOptionElement, index: number) => {
       if (index === 2) expect(option.selected).toBeTruthy();
       else expect(option.selected).toBeFalsy();
+    });
+  });
+
+  it('has modal, click custom option to open modal', () => {
+    const modalEl = screen.getByRole('dialog', { hidden: true });
+
+    expect(modalEl).toBeInTheDocument();
+  });
+
+  it('has modal, has two input', () => {
+    const modalRowInput = screen.getByPlaceholderText('가로');
+    const modalColInput = screen.getByPlaceholderText('세로');
+
+    expect(modalRowInput).toBeInTheDocument();
+    expect(modalColInput).toBeInTheDocument();
+  });
+
+  it('has modal, has two button', () => {
+    const cancelButton = screen.getByRole('button', { name: '취소', hidden: true });
+    const applyButton = screen.getByRole('button', { name: '적용', hidden: true });
+
+    expect(cancelButton).toBeInTheDocument();
+    expect(applyButton).toBeInTheDocument();
+  });
+
+  context('when modal apply button click', () => {
+    it('is call dispatch', () => {
+      const applyButton = screen.getByRole('button', { name: '적용', hidden: true });
+
+      user.click(applyButton);
+
+      expect(dispatch).toBeCalled();
     });
   });
 });
