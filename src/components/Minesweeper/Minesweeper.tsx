@@ -21,8 +21,8 @@ export default function Minesweeper() {
 
   // 영역을 클릭하면 실행하는 함수
   const startGame = (currentRow: number, currentCol: number) => {
-    if (!isStart) setMine(currentRow, currentCol), dispatch(setMinute(5)); // 만약 게임 시작을 안했으면 지뢰 셋팅
-    else checkMine(mine, currentRow, currentCol); // 시작했으면 주변에 지뢰를 탐색
+    if (!isStart) return setMine(currentRow, currentCol), dispatch(setMinute(5)); // 만약 게임 시작을 안했으면 지뢰 셋팅
+    if (isStart) return checkMine(mine, currentRow, currentCol); // 시작했으면 주변에 지뢰를 탐색
   };
 
   // 만약 지뢰를 클릭했으면 실행되는 부분
@@ -54,7 +54,11 @@ export default function Minesweeper() {
               <tr key={row}>
                 {MINE.map((value, col) => {
                   return (
-                    <td onClick={() => startGame(row, col)} key={col} css={mineSweeperCss.td(theme, value, isFindMine)}>
+                    <td
+                      data-testid={`cell-${row}-${col}`}
+                      onClick={() => startGame(row, col)}
+                      key={col}
+                      css={mineSweeperCss.td(theme, value, isFindMine)}>
                       {isFindMine && value === 10 ? '💣' : value}
                     </td>
                   );
@@ -73,6 +77,10 @@ const mineSweeperCss = {
     css({
       width: '100%',
       height: '100%',
+      WebkitUserSelect: 'none',
+      MozUserSelect: 'none',
+      msUserSelect: 'none',
+      userSelect: 'none',
     }),
 
   table: (theme: Theme) =>
@@ -91,6 +99,7 @@ const mineSweeperCss = {
       cursor: 'pointer',
       textAlign: 'center',
       backgroundColor: `${value < 10 && value !== 0 ? theme.color.gray : theme.color.lightGray}`,
+
       color: `${
         value === -1
           ? theme.color.gray

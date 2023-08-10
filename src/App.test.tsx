@@ -4,8 +4,8 @@ import { Mock, describe, it, vi } from 'vitest';
 import { useDispatch, useSelector } from 'react-redux';
 
 import App from '@/App';
-import { initialState as mine } from '@store/mineSlice';
-import { initialState as time } from '@store/timeSlice';
+import mine from '@fixtures/mine';
+import time from '@fixtures/time';
 
 vi.mock('react-redux');
 
@@ -14,8 +14,8 @@ describe('App', () => {
   (useDispatch as Mock).mockImplementation(() => dispatch);
   (useSelector as Mock).mockImplementation((selector) =>
     selector({
-      mine,
-      time,
+      mine: mine,
+      time: time,
     }),
   );
 

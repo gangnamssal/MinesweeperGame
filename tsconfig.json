@@ -23,9 +23,10 @@
     "paths": {
       "@/*": ["src/*"],
       "@hooks/*": ["src/hooks/*"],
-      "@helper/*": ["src/helper/*"],
-      "@store/*": ["src/store/*"],
       "@style/*": ["src/style/*"],
+      "@store/*": ["src/store/*"],
+      "@helper/*": ["src/helper/*"],
+      "@fixtures/*": ["fixtures/*"],
       "@components/*": ["src/components/*"]
     }
   },

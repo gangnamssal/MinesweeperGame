@@ -12,7 +12,7 @@ interface InitialState {
   isDone: boolean;
 }
 
-export const initialState: InitialState = {
+const initialState: InitialState = {
   mine: Array.from(Array(8), () => Array(8).fill(0)),
   isStart: false,
   row: 8,

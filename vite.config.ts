@@ -10,9 +10,10 @@ export default defineConfig({
     alias: [
       { find: '@', replacement: '/src' },
       { find: '@hooks', replacement: '/src/hooks' },
-      { find: '@helper', replacement: '/src/helper' },
-      { find: '@store', replacement: '/src/store' },
       { find: '@style', replacement: '/src/style' },
+      { find: '@store', replacement: '/src/store' },
+      { find: '@fixtures', replacement: '/fixtures' },
+      { find: '@helper', replacement: '/src/helper' },
       { find: '@components', replacement: '/src/components' },
     ],
   },

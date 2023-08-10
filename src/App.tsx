@@ -3,8 +3,8 @@ import { css, Global, ThemeProvider } from '@emotion/react';
 
 import theme from '@style/theme';
 import Timer from '@components/Timer';
-import Minesweeper from '@components/Minesweeper';
-import DifficultySelect from '@/components/DifficultySelect/DifficultySelect';
+import Minesweeper from '@components/Minesweeper/Minesweeper';
+import DifficultySelect from '@components/DifficultySelect/DifficultySelect';
 
 function App() {
   return (
