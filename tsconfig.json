@@ -23,6 +23,7 @@
     "paths": {
       "@/*": ["src/*"],
       "@hooks/*": ["src/hooks/*"],
+      "@mocks/*": ["__mocks__/*"],
       "@style/*": ["src/style/*"],
       "@store/*": ["src/store/*"],
       "@helper/*": ["src/helper/*"],

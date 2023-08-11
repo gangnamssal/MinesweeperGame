@@ -12,6 +12,7 @@ export default defineConfig({
       { find: '@hooks', replacement: '/src/hooks' },
       { find: '@style', replacement: '/src/style' },
       { find: '@store', replacement: '/src/store' },
+      { find: '@mocks', replacement: '/__mocks__' },
       { find: '@fixtures', replacement: '/fixtures' },
       { find: '@helper', replacement: '/src/helper' },
       { find: '@components', replacement: '/src/components' },
