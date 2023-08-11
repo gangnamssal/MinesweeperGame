@@ -7,7 +7,7 @@ import { RootState } from '@/store/store';
 import { setMinute, setSecond } from '@/store/timeSlice';
 
 export default function Timer() {
-  const time = useRef(0);
+  const time = useRef<number>(0);
   const theme = useTheme();
   const dispatch = useDispatch();
   const { isStart } = useSelector((state: RootState) => state.mine);
@@ -16,7 +16,7 @@ export default function Timer() {
   useEffect(() => {
     // 만약 게임을 시작했으면 타이머 작동
     if (isStart) {
-      time.current = setTimeout(() => {
+      time.current = window.setTimeout(() => {
         if (minute > 0 && second === 0) {
           dispatch(setMinute(minute - 1));
           dispatch(setSecond(59));
@@ -24,7 +24,8 @@ export default function Timer() {
           clearTimeout(time.current);
         } else dispatch(setSecond(second - 1));
       }, 1000);
-    } else {
+    }
+    if (!isStart) {
       // 게임이 종료되면 타이머 초기화
       dispatch(setMinute(0));
       dispatch(setSecond(0));
