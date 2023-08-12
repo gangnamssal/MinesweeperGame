@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Mock, describe, it, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
-import { act, render, renderHook, screen, waitFor } from '@testing-library/react';
+import { render, renderHook, screen, waitFor } from '@testing-library/react';
 
 import theme from '@style/theme';
 import mine from '@fixtures/mine';
 import useSetMine from '@hooks/useSetMine';
 import { setMinute } from '@store/timeSlice';
-import { changeMine } from '@store/mineSlice';
+import { changeMine, resetMine } from '@store/mineSlice';
 import useCheckMine from '@hooks/useCheckMine';
 import Minesweeper from '@components/Minesweeper/Minesweeper';
 
@@ -59,6 +59,7 @@ describe('Minesweeper', () => {
 
     it('is executed startGame function in isStart true', async () => {
       const cell_0_0 = screen.getByTestId('cell-0-0');
+      (useSelector as Mock).mockImplementationOnce((selector) => selector({ mine: { ...mine, isStart: true } }));
 
       const {
         result: { current },
@@ -76,15 +77,19 @@ describe('Minesweeper', () => {
     });
   });
 
-  // it('should change isStart when a td tag is clicked', async () => {
-  //   const cell_0_0 = screen.getByTestId('cell-0-0');
+  it('is finding mine', () => {
+    (useSelector as Mock).mockImplementationOnce((selector) => selector({ mine: { ...mine, isFindMine: true } }));
 
-  //   expect(mine.isStart).toBe(false);
+    setTimeout(() => {
+      expect(dispatch).toBeCalledWith(resetMine({ row: 0, col: 0 }));
+    }, 200);
+  });
 
-  //   await user.click(cell_0_0);
+  it('is finish mine game', () => {
+    (useSelector as Mock).mockImplementationOnce((selector) => selector({ mine: { ...mine, isDone: true } }));
 
-  //   waitFor(() => {
-  //     expect(mine.isStart).toBe(true);
-  //   });
-  // });
+    setTimeout(() => {
+      expect(dispatch).toBeCalledWith(resetMine({ row: 0, col: 0 }));
+    }, 500);
+  });
 });
