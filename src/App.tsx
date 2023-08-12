@@ -2,7 +2,7 @@
 import { css, Global, ThemeProvider } from '@emotion/react';
 
 import theme from '@style/theme';
-import Timer from '@components/Timer';
+import Timer from '@components/Timer/Timer';
 import Minesweeper from '@components/Minesweeper/Minesweeper';
 import DifficultySelect from '@components/DifficultySelect/DifficultySelect';
 
