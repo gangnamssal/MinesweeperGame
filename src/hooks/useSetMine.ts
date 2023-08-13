@@ -1,7 +1,7 @@
-import _ from 'lodash';
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import deepCopy from '@helper/deepCopy';
 import { RootState } from '@store/store';
 import { changeMine } from '@store/mineSlice';
 import useCheckMine from '@hooks/useCheckMine';
@@ -12,7 +12,7 @@ export default function useSetMine() {
   const [newMine, setNewMine] = useState<number[][]>();
   const { row, col, mine: MINE } = useSelector((state: RootState) => state.mine);
 
-  const mine = _.cloneDeep(MINE);
+  const mine = deepCopy(MINE);
 
   const setMine = (currentRow: number, currentCol: number) => {
     for (let i = 0; i < row; i++) {
