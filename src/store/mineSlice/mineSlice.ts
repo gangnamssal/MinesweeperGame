@@ -45,6 +45,10 @@ const mineSlice = createSlice({
         row: action.payload.row,
         col: action.payload.col,
         visited: Array.from(Array(action.payload.row), () => Array(action.payload.col).fill(0)),
+        isStart: false,
+        stack: [],
+        isFindMine: false,
+        isDone: false,
       };
     },
     // 변경된 지뢰맵을 저장
