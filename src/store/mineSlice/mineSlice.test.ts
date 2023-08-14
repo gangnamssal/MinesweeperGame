@@ -10,7 +10,7 @@ import reducer, {
   setIsDone,
   stackPush,
   visitedPush,
-} from '@store/mineSlice';
+} from '@store/mineSlice/mineSlice';
 
 const context = describe;
 

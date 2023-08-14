@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import mine from '@fixtures/mine';
 import useSetMine from '@hooks/useSetMine';
-import { changeMine } from '@store/mineSlice';
 import useCheckMine from '@hooks/useCheckMine';
+import { changeMine } from '@store/mineSlice/mineSlice';
 import { act, renderHook } from '@testing-library/react';
 
 vi.mock('react-redux');

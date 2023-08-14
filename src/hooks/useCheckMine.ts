@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import deepCopy from '@helper/deepCopy';
 import { RootState } from '@store/store';
 import checkDone from '@helper/checkDone';
-import { changeMine, findMine, setIsDone, stackPush, visitedPush } from '@store/mineSlice';
+import { changeMine, findMine, setIsDone, stackPush, visitedPush } from '@store/mineSlice/mineSlice';
 
 export default function useCheckMine() {
   const dispatch = useDispatch();

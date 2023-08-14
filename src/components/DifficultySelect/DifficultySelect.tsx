@@ -3,7 +3,7 @@ import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { css, Theme, useTheme } from '@emotion/react';
 
-import { changeDifficulty, CustomMap, setCustomMap } from '@store/mineSlice';
+import { changeDifficulty, CustomMap, setCustomMap } from '@store/mineSlice/mineSlice';
 
 const difficultyObj: DifficultyObj = {
   '0': { row: 8, col: 8 },

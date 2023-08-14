@@ -7,10 +7,10 @@ import theme from '@style/theme';
 import mine from '@fixtures/mine';
 import time from '@fixtures/time';
 import Timer from '@components/Timer/Timer';
-import { setMinute, setSecond } from '@store/timeSlice';
+import { setMinute, setSecond } from '@store/timeSlice/timeSlice';
 
 vi.mock('react-redux');
-vi.mock('@store/timeSlice');
+vi.mock('@store/timeSlice/timeSlice');
 
 const dispatch = vi.fn();
 const context = describe;

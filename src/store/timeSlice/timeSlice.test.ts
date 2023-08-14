@@ -1,7 +1,7 @@
 import { describe, it } from 'vitest';
 
 import time from '@fixtures/time';
-import reducer, { setMinute, setSecond } from '@store/timeSlice';
+import reducer, { setMinute, setSecond } from '@store/timeSlice/timeSlice';
 
 const context = describe;
 

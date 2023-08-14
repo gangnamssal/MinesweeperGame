@@ -8,10 +8,10 @@ import { render, renderHook, screen, waitFor } from '@testing-library/react';
 import theme from '@style/theme';
 import mine from '@fixtures/mine';
 import useSetMine from '@hooks/useSetMine';
-import { setMinute } from '@store/timeSlice';
-import { changeMine, resetMine } from '@store/mineSlice';
 import useCheckMine from '@hooks/useCheckMine';
+import { setMinute } from '@store/timeSlice/timeSlice';
 import Minesweeper from '@components/Minesweeper/Minesweeper';
+import { changeMine, resetMine } from '@store/mineSlice/mineSlice';
 
 vi.mock('react-redux');
 

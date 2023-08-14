@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import mineSlice from '@store/mineSlice';
-import timeSlice from '@store/timeSlice';
+import mineSlice from '@store/mineSlice/mineSlice';
+import timeSlice from '@store/timeSlice/timeSlice';
 
 export const store = configureStore({
   reducer: {

@@ -5,9 +5,9 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { RootState } from '@store/store';
 import useSetMine from '@hooks/useSetMine';
-import { setMinute } from '@store/timeSlice';
-import { resetMine } from '@store/mineSlice';
 import useCheckMine from '@hooks/useCheckMine';
+import { resetMine } from '@store/mineSlice/mineSlice';
+import { setMinute } from '@/store/timeSlice/timeSlice';
 
 // 주변 지뢰 갯수를 보여주는 숫자들의 색상
 const colors = ['#BDBDBD', 'red', 'orange', 'yellow', 'green', 'blue', 'navy', 'purple'];

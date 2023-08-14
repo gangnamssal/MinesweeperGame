@@ -5,7 +5,7 @@ import { act, renderHook } from '@testing-library/react';
 import mine from '@fixtures/mine';
 import checkDone from '@helper/checkDone';
 import useCheckMine from '@hooks/useCheckMine';
-import { changeMine, findMine, setIsDone, stackPush, visitedPush } from '@store/mineSlice';
+import { changeMine, findMine, setIsDone, stackPush, visitedPush } from '@store/mineSlice/mineSlice';
 
 vi.mock('react-redux');
 

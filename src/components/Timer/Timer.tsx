@@ -3,8 +3,8 @@ import { useEffect, useRef } from 'react';
 import { css, Theme, useTheme } from '@emotion/react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { RootState } from '@/store/store';
-import { setMinute, setSecond } from '@/store/timeSlice';
+import { RootState } from '@store/store';
+import { setMinute, setSecond } from '@store/timeSlice/timeSlice';
 
 export default function Timer() {
   const time = useRef<number>(0);
