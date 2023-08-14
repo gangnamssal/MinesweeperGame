@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import deepCopy from '@helper/deepCopy';
@@ -9,7 +8,6 @@ import useCheckMine from '@hooks/useCheckMine';
 export default function useSetMine() {
   const dispatch = useDispatch();
   const { checkMine } = useCheckMine();
-  const [newMine, setNewMine] = useState<number[][]>();
   const { row, col, mine: MINE } = useSelector((state: RootState) => state.mine);
 
   const mine = deepCopy(MINE);
@@ -21,10 +19,9 @@ export default function useSetMine() {
         if (Math.random() < 0.2 && i !== currentRow && j !== currentCol) mine[i][j] = 10;
       }
     }
-    setNewMine(() => mine);
     dispatch(changeMine(mine));
     checkMine(mine, currentRow, currentCol); // 생성한 뒤 주변에 지뢰를 검사
   };
 
-  return { newMine, setMine };
+  return { setMine };
 }
