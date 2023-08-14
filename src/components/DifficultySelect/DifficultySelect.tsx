@@ -54,7 +54,9 @@ export default function DifficultySelect() {
             <input type='number' placeholder='세로' onChange={customColInput} css={difficultySelectCss.input} />
 
             <div css={difficultySelectCss.modalButton}>
-              <button css={difficultySelectCss.cancelBtn}>취소</button>
+              <button onClick={() => dialogRef.current?.close()} css={difficultySelectCss.cancelBtn}>
+                취소
+              </button>
               <button onClick={applyCustomInput} css={difficultySelectCss.applyBtn}>
                 적용
               </button>
