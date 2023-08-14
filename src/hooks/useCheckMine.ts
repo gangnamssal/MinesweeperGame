@@ -10,7 +10,8 @@ export default function useCheckMine() {
   const dispatch = useDispatch();
   const { stack, visited, row, col } = useSelector((state: RootState) => state.mine);
 
-  const cnt = useRef<number>(0); // 지뢰 수
+  const mineCnt = useRef<number>(0); // 지뢰 수
+  const flagCnt = useRef<number>(0); // 깃발 수
   const dr = useRef<number[]>([-1, -1, 0, 1, 1, 1, 0, -1]); // 클릭한 부분 8방으로 탐색
   const dc = useRef<number[]>([0, 1, 1, 1, 0, -1, -1, -1]); // 클릭한 부분 8방으로 탐색
 
@@ -32,7 +33,8 @@ export default function useCheckMine() {
 
       let arr: number[][] = []; // 방문한 위치를 임시로 저장하는 배열
       deepCopyMine[r][c] = -1; // 방문한 곳에 지뢰가 없으면 -1로 표시
-      cnt.current = 0; // 지뢰 수를 0으로 초기화
+      mineCnt.current = 0; // 지뢰 수를 0으로 초기화
+      flagCnt.current = 0; // 깃발 수를 초기화
 
       for (let i = 0; i < 8; i++) {
         const nr = r + dr.current[i]; // 8방의 위치를 확인
@@ -40,20 +42,22 @@ export default function useCheckMine() {
 
         // 만약 위치가 맵을 벗어나지 않고 방문하지 않았던 곳이면 실행
         if (nr >= 0 && nc >= 0 && nr < row && nc < col && !deepCopyVisited[nr][nc]) {
-          if (deepCopyMine[nr][nc] === 10) cnt.current++; // 방문한 곳이 지뢰면 지뢰수를 체크
+          if (deepCopyMine[nr][nc] === 10 || deepCopyMine[nr][nc] === 12) mineCnt.current++; // 방문한 곳이 지뢰면 지뢰수를 체크
+          if (deepCopyMine[nr][nc] === 11) flagCnt.current++; // 방문한 곳이 깃발이면 지뢰수를 체크
           arr = [...arr, [nr, nc]]; // 방문했던 곳을 임시 저장
         }
       }
 
       // 만약 방문했던 곳 전부가 지뢰가 없었다면 모든 곳에 -1을 표시
-      if (!cnt.current) {
+      if (!mineCnt.current && !flagCnt.current) {
         for (const [r, c] of arr) {
           deepCopyMine[r][c] = -1;
           deepCopyVisited[r][c] = 1;
         }
         // stack에 방문할 곳을 저장
         deepCopyStack = [...deepCopyStack, ...arr];
-      } else deepCopyMine[r][c] = cnt.current; // 만약 지뢰가 하나라도 존재했다면 현재 위치에 지뢰 수를 표시
+      } else if (flagCnt.current && !mineCnt.current) deepCopyMine[r][c] = -1;
+      else deepCopyMine[r][c] = mineCnt.current; // 만약 지뢰가 하나라도 존재했다면 현재 위치에 지뢰 수를 표시
       helper();
     }
     helper();

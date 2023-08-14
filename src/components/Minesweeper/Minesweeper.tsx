@@ -3,11 +3,12 @@ import { useEffect } from 'react';
 import { css, Theme, useTheme } from '@emotion/react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import deepCopy from '@helper/deepCopy';
 import { RootState } from '@store/store';
 import useSetMine from '@hooks/useSetMine';
 import useCheckMine from '@hooks/useCheckMine';
-import { resetMine } from '@store/mineSlice/mineSlice';
-import { setMinute } from '@/store/timeSlice/timeSlice';
+import { setMinute } from '@store/timeSlice/timeSlice';
+import { resetMine, setFlag } from '@store/mineSlice/mineSlice';
 
 // 주변 지뢰 갯수를 보여주는 숫자들의 색상
 const colors = ['#BDBDBD', 'red', 'orange', 'yellow', 'green', 'blue', 'navy', 'purple'];
@@ -20,9 +21,23 @@ export default function Minesweeper() {
   const { mine, isStart, isFindMine, isDone, row, col } = useSelector((state: RootState) => state.mine);
 
   // 영역을 클릭하면 실행하는 함수
+  // 11 : 지뢰가 없는 영역의 플래그
+  // 12 : 지뢰가 있는 영역의 플래그
   const startGame = (currentRow: number, currentCol: number) => {
-    if (!isStart) return setMine(currentRow, currentCol), dispatch(setMinute(5)); // 만약 게임 시작을 안했으면 지뢰 셋팅
-    if (isStart) return checkMine(mine, currentRow, currentCol); // 시작했으면 주변에 지뢰를 탐색
+    // 만약 게임 시작을 안했으면 지뢰 셋팅
+    if (!isStart && mine[currentRow][currentCol] !== 11 && mine[currentRow][currentCol] !== 12)
+      return setMine(currentRow, currentCol), dispatch(setMinute(5));
+
+    // 시작했으면 바로 주변에 지뢰를 탐색
+    if (isStart && mine[currentRow][currentCol] !== 11 && mine[currentRow][currentCol] !== 12)
+      return checkMine(mine, currentRow, currentCol);
+  };
+
+  // 영역에 우클릭하면 실행되는 함수
+  const rightClickEvent = (e: React.MouseEvent<HTMLTableCellElement>, row: number, col: number) => {
+    e.preventDefault();
+    if (isStart && (mine[row][col] === 0 || mine[row][col] === 10)) dispatch(setFlag(mineSetFlag(mine, row, col)));
+    if (isStart && (mine[row][col] === 11 || mine[row][col] === 12)) dispatch(setFlag(mineDeleteFlag(mine, row, col)));
   };
 
   // 만약 지뢰를 클릭했으면 실행되는 부분
@@ -57,9 +72,10 @@ export default function Minesweeper() {
                     <td
                       data-testid={`cell-${row}-${col}`}
                       onClick={() => startGame(row, col)}
+                      onContextMenu={(e) => rightClickEvent(e, row, col)}
                       key={col}
                       css={mineSweeperCss.td(theme, value, isFindMine)}>
-                      {isFindMine && value === 10 ? '💣' : value}
+                      {isFindMine && value == 10 ? '💣' : value == 11 || value == 12 ? '🚩' : value}
                     </td>
                   );
                 })}
@@ -71,6 +87,24 @@ export default function Minesweeper() {
     </div>
   );
 }
+
+const mineSetFlag = (mine: number[][], row: number, col: number) => {
+  const newMine = deepCopy(mine);
+
+  if (newMine[row][col] === 0) newMine[row][col] = 11;
+  if (newMine[row][col] === 10) newMine[row][col] = 12;
+
+  return newMine;
+};
+
+const mineDeleteFlag = (mine: number[][], row: number, col: number) => {
+  const newMine = deepCopy(mine);
+
+  if (newMine[row][col] === 11) newMine[row][col] = 0;
+  if (newMine[row][col] === 12) newMine[row][col] = 10;
+
+  return newMine;
+};
 
 const mineSweeperCss = {
   container: () =>
@@ -93,11 +127,12 @@ const mineSweeperCss = {
 
   td: (theme: Theme, value: number, isFindMine: boolean) =>
     css({
-      minWidth: '25px',
-      minHeight: '25px',
+      minWidth: '15px',
+      minHeight: '15px',
       border: '1px solid white',
       cursor: 'pointer',
       textAlign: 'center',
+      fontSize: '0.7rem',
       backgroundColor: `${value < 10 && value !== 0 ? theme.color.gray : theme.color.lightGray}`,
 
       color: `${

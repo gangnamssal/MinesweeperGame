@@ -7,6 +7,7 @@ import reducer, {
   findMine,
   resetMine,
   setCustomMap,
+  setFlag,
   setIsDone,
   stackPush,
   visitedPush,
@@ -113,6 +114,18 @@ describe('mineSlice', () => {
       expect(state.col).toBe(20);
       expect(state.mine).toHaveLength(20);
       expect(state.mine[0]).toHaveLength(20);
+    });
+  });
+
+  context('setFlag', () => {
+    it('set flag true', () => {
+      const newMineMap = [
+        [-1, -1, 10],
+        [11, -1, 0],
+      ];
+      const state = reducer(mine, setFlag(newMineMap));
+
+      expect(state.mine[1][0]).toBe(11);
     });
   });
 });

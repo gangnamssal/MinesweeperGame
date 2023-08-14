@@ -95,9 +95,22 @@ const mineSlice = createSlice({
         col: action.payload.col,
       };
     },
+
+    setFlag(state, action: PayloadAction<number[][]>) {
+      return { ...state, mine: action.payload };
+    },
   },
 });
 
-export const { changeDifficulty, changeMine, stackPush, visitedPush, findMine, resetMine, setIsDone, setCustomMap } =
-  mineSlice.actions;
+export const {
+  changeDifficulty,
+  changeMine,
+  stackPush,
+  visitedPush,
+  findMine,
+  resetMine,
+  setIsDone,
+  setCustomMap,
+  setFlag,
+} = mineSlice.actions;
 export default mineSlice.reducer;
