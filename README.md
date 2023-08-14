@@ -37,28 +37,46 @@
   ## # 폴더 구조
 
   ```
-  src
-   ┣ assets
-   ┃ ┗ react.svg
-   ┣ components
-   ┃ ┣ CustomInput.tsx
-   ┃ ┣ DifficultySelect.tsx
-   ┃ ┣ Minesweeper.tsx
-   ┃ ┗ Timer.tsx
-   ┣ helper
-   ┃ ┗ checkDone.ts
-   ┣ hooks
-   ┃ ┣ useCheckMine.ts
-   ┃ ┗ useSetMine.ts
-   ┣ store
-   ┃ ┣ mineSlice.ts
-   ┃ ┣ store.ts
-   ┃ ┗ timeSlice.ts
-   ┣ style
-   ┃ ┗ theme.ts
-   ┣ App.tsx
-   ┣ main.tsx
-   ┗ vite-env.d.ts
+  📦src
+   ┣ 📂assets
+   ┃ ┗ 📜react.svg
+   ┣ 📂components
+   ┃ ┣ 📂CustomInput
+   ┃ ┃ ┣ 📜CustomInput.test.tsx
+   ┃ ┃ ┗ 📜CustomInput.tsx
+   ┃ ┣ 📂DifficultySelect
+   ┃ ┃ ┣ 📜DifficultySelect.test.tsx
+   ┃ ┃ ┗ 📜DifficultySelect.tsx
+   ┃ ┣ 📂Minesweeper
+   ┃ ┃ ┣ 📜Minesweeper.test.tsx
+   ┃ ┃ ┗ 📜Minesweeper.tsx
+   ┃ ┗ 📂Timer
+   ┃ ┃ ┣ 📜Timer.test.tsx
+   ┃ ┃ ┗ 📜Timer.tsx
+   ┣ 📂helper
+   ┃ ┣ 📜checkDone.test.ts
+   ┃ ┣ 📜checkDone.ts
+   ┃ ┣ 📜deepCopy.test.ts
+   ┃ ┗ 📜deepCopy.ts
+   ┣ 📂hooks
+   ┃ ┣ 📜useCheckMine.test.ts
+   ┃ ┣ 📜useCheckMine.ts
+   ┃ ┣ 📜useSetMine.test.ts
+   ┃ ┗ 📜useSetMine.ts
+   ┣ 📂store
+   ┃ ┣ 📂mineSlice
+   ┃ ┃ ┣ 📜mineSlice.test.ts
+   ┃ ┃ ┗ 📜mineSlice.ts
+   ┃ ┣ 📂timeSlice
+   ┃ ┃ ┣ 📜timeSlice.test.ts
+   ┃ ┃ ┗ 📜timeSlice.ts
+   ┃ ┗ 📜store.ts
+   ┣ 📂style
+   ┃ ┗ 📜theme.ts
+   ┣ 📜App.test.tsx
+   ┣ 📜App.tsx
+   ┣ 📜main.tsx
+   ┗ 📜vite-env.d.ts
   ```
 
   
@@ -75,7 +93,7 @@
     - 난이도는 Beginner (8X8), Intermediate (16X16), Expert (32X16)로 변경이 가능하고 custom으로 칸을 조절할 수 있습니다.
 
 
-  
+
 
   ## # 배포 링크
 
